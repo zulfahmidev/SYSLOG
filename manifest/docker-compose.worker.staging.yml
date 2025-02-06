@@ -1,0 +1,66 @@
+version: "3.7"
+services:
+    localoka-service-notif-worker-staging:
+        container_name: localoka-service-notif-worker-staging
+        image: registry.gitlab.com/localoka-briit/localoka-service-notif:staging
+        privileged: true
+        devices:
+            - "/dev/fuse:/dev/fuse"
+        restart: always
+        environment:
+            # Flask
+            FLASK_ENV: ${FLASK_ENV}
+            FLASK_DEBUG: ${FLASK_DEBUG}
+            FLASK_WORKER: ${FLASK_WORKER}
+            # Storage
+            MINIO_URL: ${MINIO_URL}
+            MINIO_BUCKET: ${MINIO_BUCKET}
+            # API Gateway
+            API_GATEWAY_HOST: ${API_GATEWAY_HOST}
+            API_GATEWAY_PORT: ${API_GATEWAY_PORT}
+            API_SERVICE_KEY: ${API_SERVICE_KEY}
+            # Database
+            DATABASE_HOST: ${DATABASE_HOST}
+            DATABASE_PORT: ${DATABASE_PORT}
+            DATABASE_NAME: ${DATABASE_NAME}
+            DATABASE_USER: ${DATABASE_USER}
+            DATABASE_PASS: ${DATABASE_PASS}
+            # Redis
+            REDIS_HOST: ${REDIS_HOST}
+            REDIS_PORT: ${REDIS_PORT}
+            # rabitmq
+            RABBITMQ_HOST: ${RABBITMQ_HOST}
+            RABBITMQ_PORT: ${RABBITMQ_PORT}
+            RABBITMQ_USER: ${RABBITMQ_USER}
+            RABBITMQ_PASS: ${RABBITMQ_PASS}
+            RABBITMQ_VHOST: ${RABBITMQ_VHOST}
+            # Mail
+            MAIL_SERVER: ${MAIL_SERVER}
+            MAIL_PORT: ${MAIL_PORT}
+            MAIL_USE_TLS: ${MAIL_USE_TLS}
+            MAIL_USE_SSL: ${MAIL_USE_SSL}
+            MAIL_USERNAME: ${MAIL_USERNAME}
+            MAIL_PASSWORD: ${MAIL_PASSWORD}
+            MAIL_DEFAULT_SENDER: ${MAIL_DEFAULT_SENDER}
+            MAIL_SENDER_NAME: ${MAIL_SENDER_NAME}
+            MAIL_SENDER_ADDRESS: ${MAIL_SENDER_ADDRESS}
+            # firebase
+            FIREBASE_HOST : ${FIREBASE_HOST}
+            FIREBASE_SERVER_KEY : ${FIREBASE_SERVER_KEY}
+            FIREBASE_APP_ID : ${FIREBASE_APP_ID}
+            # Qiscus
+            QISCUS_HOST : ${QISCUS_HOST}
+            QISCUS_APP_ID : ${QISCUS_APP_ID}
+            QISCUS_SECRET_KEY : ${QISCUS_SECRET_KEY}
+            # partner
+            PARTNER_BRIAPI_KEY : ${PARTNER_BRIAPI_KEY}
+            PARTNER_BRIAPI_AES_IV : ${PARTNER_BRIAPI_AES_IV}
+            PARTNER_BRIAPI_AES_KEY : ${PARTNER_BRIAPI_AES_KEY}
+            PARTNER_BRIAPI_AES_MODE : ${PARTNER_BRIAPI_AES_MODE}
+            PARTNER_BRIAPI_AES_BIT : ${PARTNER_BRIAPI_AES_BIT}
+        entrypoint: ./worker.sh
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./credentials:/home/localoka/.aws/credentials:ro"
+        network_mode: "host"

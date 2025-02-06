@@ -1,0 +1,56 @@
+version: "3.7"
+services:
+    localoka-service-syslog-development:
+        container_name: localoka-service-syslog-development
+        build: ../
+        image: localoka-service-syslog:dev
+        restart: always
+        ports:
+            - 5000:5000
+        environment:
+            # Flask
+            FLASK_ENV: ${FLASK_ENV}
+            FLASK_DEBUG: ${FLASK_DEBUG}
+            FLASK_WORKER: ${FLASK_WORKER}
+            # API Gateway
+            API_GATEWAY_HOST: ${API_GATEWAY_HOST}
+            API_GATEWAY_PORT: ${API_GATEWAY_PORT}
+            API_SERVICE_KEY: ${API_SERVICE_KEY}
+            # Database
+            DATABASE_HOST: ${DATABASE_HOST}
+            DATABASE_PORT: ${DATABASE_PORT}
+            DATABASE_NAME: ${DATABASE_NAME}
+            DATABASE_USER: ${DATABASE_USER}
+            DATABASE_PASS: ${DATABASE_PASS}
+            # Redis
+            REDIS_HOST: ${REDIS_HOST}
+            REDIS_PORT: ${REDIS_PORT}
+            # rabitmq
+            RABBITMQ_HOST: ${RABBITMQ_HOST}
+            RABBITMQ_PORT: ${RABBITMQ_PORT}
+            RABBITMQ_USER: ${RABBITMQ_USER}
+            RABBITMQ_PASS: ${RABBITMQ_PASS}
+            RABBITMQ_VHOST: ${RABBITMQ_VHOST}
+            # Mail
+            MAIL_SERVER: ${MAIL_SERVER}
+            MAIL_PORT: ${MAIL_PORT}
+            MAIL_USE_TLS: ${MAIL_USE_TLS}
+            MAIL_USE_SSL: ${MAIL_USE_SSL}
+            MAIL_USERNAME: ${MAIL_USERNAME}
+            MAIL_PASSWORD: ${MAIL_PASSWORD}
+            MAIL_DEFAULT_SENDER: ${MAIL_DEFAULT_SENDER}
+            MAIL_SENDER_NAME: ${MAIL_SENDER_NAME}
+            MAIL_SENDER_ADDRESS: ${MAIL_SENDER_ADDRESS}
+        networks:
+            - environment-development
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+networks:
+    environment-development:
+        external: true
+        name: environment-development
+volumes:
+    localoka-service-syslog-vol-development:
+        external: true
+        name: localoka-service-syslog-vol-development

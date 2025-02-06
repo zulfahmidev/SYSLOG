@@ -1,0 +1,157 @@
+stages:
+    - build
+    - deploy
+
+variables:
+    IMAGE_RUNTIME: $CI_REGISTRY_IMAGE
+    IMAGE_BUILDER: $CI_REGISTRY_IMAGE/builder
+    BRANCH_TAG: $CI_COMMIT_BRANCH
+
+    TAG_IMAGE_BUILDER_LATEST: $IMAGE_BUILDER:latest
+    TAG_IMAGE_BUILDER_BRANCH: $IMAGE_BUILDER:$BRANCH_TAG
+    TAG_IMAGE_RUNTIME_LATEST: $IMAGE_RUNTIME:latest
+    TAG_IMAGE_RUNTIME_BRANCH: $IMAGE_RUNTIME:$BRANCH_TAG
+
+.variable_sandbox: &variable_sandbox
+    FIREBASE_APP_ID: $SANDBOX_FIREBASE_APP_ID
+    FIREBASE_SERVER_KEY: $SANDBOX_FIREBASE_SERVER_KEY
+    QISCUS_CHANNEL_APP_ID: $SANDBOX_QISCUS_CHANNEL_APP_ID
+    QISCUS_CHANNEL_SECRET_KEY: $SANDBOX_QISCUS_CHANNEL_SECRET_KEY
+    MAIL_USERNAME: $SANDBOX_MAIL_USERNAME
+    MAIL_PASSWORD: $SANDBOX_MAIL_PASSWORD
+
+.variable_live: &variable_live
+    FIREBASE_APP_ID: $LIVE_FIREBASE_APP_ID
+    FIREBASE_SERVER_KEY: $LIVE_FIREBASE_SERVER_KEY
+    QISCUS_CHANNEL_APP_ID: $LIVE_QISCUS_CHANNEL_APP_ID
+    QISCUS_CHANNEL_SECRET_KEY: $LIVE_QISCUS_CHANNEL_SECRET_KEY
+    MAIL_USERNAME: $LIVE_MAIL_USERNAME
+    MAIL_PASSWORD: $LIVE_MAIL_PASSWORD
+
+.variable-development:
+    variables:
+        <<: *variable_sandbox
+        SERVER_USER: $DEVELOPMENT_SERVER_USER
+        DATABASE_USER: $DEVELOPMENT_DATABASE_USER
+        DATABASE_PASS: $DEVELOPMENT_DATABASE_PASS
+        MINIO_USER: $DEVELOPMENT_MINIO_USER
+        MINIO_PASS: $DEVELOPMENT_MINIO_PASS
+        RABBITMQ_WORKER_USER: $DEVELOPMENT_RABBITMQ_WORKER_USER
+        RABBITMQ_WORKER_PASS: $DEVELOPMENT_RABBITMQ_WORKER_PASS
+        API_SERVICE_KEY: $DEVELOPMENT_API_SERVICE_KEY
+        # prepare role
+        API_SERVICE_KEY_OLD: $API_SERVICE_KEY_DEVELOPMENT
+
+.variable-staging:
+    variables:
+        <<: *variable_sandbox
+        SERVER_USER: $STAGING_SERVER_USER
+        DATABASE_USER: $STAGING_DATABASE_USER
+        DATABASE_PASS: $STAGING_DATABASE_PASS
+        MINIO_USER: $STAGING_MINIO_USER
+        MINIO_PASS: $STAGING_MINIO_PASS
+        RABBITMQ_WORKER_USER: $STAGING_RABBITMQ_WORKER_USER
+        RABBITMQ_WORKER_PASS: $STAGING_RABBITMQ_WORKER_PASS
+        API_SERVICE_KEY: $STAGING_API_SERVICE_KEY
+        # prepare role
+        API_SERVICE_KEY_OLD: $API_SERVICE_KEY_STAGING
+
+.variable-production:
+    variables:
+        <<: *variable_live
+        SERVER_USER: $PRODUCTION_SERVER_USER
+        DATABASE_USER: $PRODUCTION_DATABASE_USER
+        DATABASE_PASS: $PRODUCTION_DATABASE_PASS
+        MINIO_USER: $PRODUCTION_MINIO_USER
+        MINIO_PASS: $PRODUCTION_MINIO_PASS
+        RABBITMQ_WORKER_USER: $PRODUCTION_RABBITMQ_WORKER_USER
+        RABBITMQ_WORKER_PASS: $PRODUCTION_RABBITMQ_WORKER_PASS
+        API_SERVICE_KEY: $PRODUCTION_API_SERVICE_KEY
+        # prepare role
+        API_SERVICE_KEY_OLD: $API_SERVICE_KEY_PRODUCTION
+
+build-docker:
+    stage: build
+    tags:
+        - localoka-dev
+    image: docker:20.10.17
+    services:
+        - docker:20.10.17-dind
+    before_script:
+        - export $(grep -v '^#' $VARS_FILE | xargs)
+        # - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token $CI_REGISTRY --password-stdin
+    script:
+        # pull image for cache
+        - docker pull $TAG_IMAGE_BUILDER_BRANCH -q || true
+        - docker pull $TAG_IMAGE_RUNTIME_BRANCH -q || true
+        # build image builder
+        - docker build --target builder --cache-from=$TAG_IMAGE_BUILDER_BRANCH --build-arg CI_PACKAGE_USER=${CI_PACKAGE_USER} --build-arg CI_PACKAGE_PASS=${CI_PACKAGE_PASS} --build-arg CI_GROUP_ID=${CI_GROUP_ID} -t $TAG_IMAGE_BUILDER_LATEST -t $TAG_IMAGE_BUILDER_BRANCH .
+        # build image runtime
+        - docker build --cache-from=$TAG_IMAGE_BUILDER_BRANCH --cache-from=$TAG_IMAGE_RUNTIME_BRANCH --build-arg CI_PACKAGE_USER=${CI_PACKAGE_USER} --build-arg CI_PACKAGE_PASS=${CI_PACKAGE_PASS} --build-arg CI_GROUP_ID=${CI_GROUP_ID} -t $TAG_IMAGE_RUNTIME_LATEST -t $TAG_IMAGE_RUNTIME_BRANCH .
+        - docker push $IMAGE_BUILDER --all-tags -q
+        - docker push $IMAGE_RUNTIME --all-tags -q
+    after_script:
+        - docker rmi -f $(docker images -f "dangling=true" -q) || true
+        - docker logout $CI_REGISTRY
+    only:
+        - dev-ipnet
+
+.template-deploy:
+    stage: deploy
+    image: gitlab.ipnet.co.id:5050/localoka/localoka-ansible:$BRANCH_TAG
+    before_script:
+        - mkdir -p ~/.ssh
+        - echo "$RUNNER_PRIVATE_KEY" > ~/.ssh/id_rsa
+        - chmod 400 ~/.ssh/id_rsa
+        - echo "$RUNNER_PUBLIC_KEY" > ~/.ssh/id_rsa.pub
+        - chmod 400 ~/.ssh/id_rsa.pub
+
+.template-deploy-dev:
+    extends:
+        - .template-deploy
+        - .variable-development
+    tags:
+        - localoka-dev
+    only:
+        - development
+        #- dev-ipnet
+.template-deploy-staging:
+    extends:
+        - .template-deploy
+        - .variable-staging
+    tags:
+        - localoka-staging-runner
+    only:
+        - staging
+
+.template-deploy-production:
+    extends:
+        - .template-deploy
+        - .variable-production
+    tags:
+        - localoka-production-runner
+    only:
+        - production
+
+.script-service: &script-service
+    - ansible-playbook ~/playbook/deploy/service-notif-api.yml -i ~/inventory
+    - ansible-playbook ~/playbook/deploy/service-notif-worker.yml -i ~/inventory
+    - ansible-playbook ~/playbook/deploy/service-notif-scheduler.yml -i ~/inventory
+
+deploy-dev:
+    extends:
+        - .template-deploy-dev
+    script:
+        - *script-service
+
+deploy-staging:
+    extends:
+        - .template-deploy-staging
+    script:
+        - *script-service
+
+deploy-production:
+    extends:
+        - .template-deploy-production
+    script:
+        - *script-service

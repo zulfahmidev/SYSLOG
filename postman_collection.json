@@ -1,0 +1,1423 @@
+{
+	"info": {
+		"_postman_id": "c3cb6247-e785-4242-8754-8bf3edd0442b",
+		"name": "Service Notif",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13483952"
+	},
+	"item": [
+		{
+			"name": "dev",
+			"item": [
+				{
+					"name": "celery",
+					"item": [
+						{
+							"name": "celery",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/celery",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"celery"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "celery/send-task",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/celery/send-task?task_name=send_notif&queue=notification&uid=c603e8b2-4eb2-4e7c-a8ba-9c3e43ce4718",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"celery",
+										"send-task"
+									],
+									"query": [
+										{
+											"key": "task_name",
+											"value": "send_notif"
+										},
+										{
+											"key": "queue",
+											"value": "notification"
+										},
+										{
+											"key": "uid",
+											"value": "034b5065-d587-44cb-9165-a2de898aab93",
+											"description": "without template",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "c603e8b2-4eb2-4e7c-a8ba-9c3e43ce4718",
+											"description": "with template"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "celery/send-notif",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/celery/send-notif?uid=034b5065-d587-44cb-9165-a2de898aab93",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"celery",
+										"send-notif"
+									],
+									"query": [
+										{
+											"key": "uid",
+											"value": "034b5065-d587-44cb-9165-a2de898aab93",
+											"description": "without template"
+										},
+										{
+											"key": "uid",
+											"value": "c603e8b2-4eb2-4e7c-a8ba-9c3e43ce4718",
+											"description": "with template",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "celery/add-log",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/celery/add-log",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"celery",
+										"add-log"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "celery/register-token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_uid\": \"ce03934e-9138-4bb5-bf20-249f882d6cc9\",\n    \"token\": \"user-token-1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/celery/register-token",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"celery",
+										"register-token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "template",
+					"item": [
+						{
+							"name": "template/format",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/template/format?template=whatsapp-account-request-otp",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"template",
+										"format"
+									],
+									"query": [
+										{
+											"key": "template",
+											"value": "email-account-welcome-buyer-subject",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-account-welcome-buyer-html",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-account-welcome-admin-txt",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "whatsapp-account-request-otp"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "template/format-string",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/template/format-string",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"template",
+										"format-string"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "template/display",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/template/display",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"template",
+										"display"
+									],
+									"query": [
+										{
+											"key": "uid",
+											"value": "b5a44ab2-6b0b-4206-8450-0e7df2e09098",
+											"description": "account",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "e5c9a6ac-268e-4c8f-a18b-e7082eb8db96",
+											"description": "transaction",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-account-welcome-buyer-subject",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-account-welcome-buyer-html",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-account-welcome-admin-txt",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-purchase-waiting-payment-subject",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-purchase-waiting-payment-html",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-purchase-confirmed-html",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-purchase-completed-html",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-sale-new-order-subject",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-sale-new-order-txt",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-sale-delivered-txt",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-sale-completed-txt",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "notification",
+					"item": [
+						{
+							"name": "notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-App",
+										"value": "service-notif",
+										"type": "text"
+									},
+									{
+										"key": "X-App-Key",
+										"value": "21107c5e5ade474abdc787f8ba99f6a1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source\": \"account\",\n    \"severity\": \"info\",\n    \"payload\": {\n        \"channels\": [\n            {\n                \"name\": \"internal\",\n                \"subject\" : \"subject string\",\n                \"message\" : \"message string\",\n                \"data\": {\n                    \"type\" : \"purchase\",\n                    \"uid\": \"order-uid\"\n                }\n            },\n            {\n                \"name\": \"email\",\n                \"subject\" : \"subject string\",\n                \"body_text\" : \"body text string\",\n                \"body_html\" : \"body html string\"\n            }\n        ],\n        \"user\": {\n            \"uid\": \"f6b67c87-310e-4a9d-b639-be21db31d47e\",\n            \"name\": \"aku buyer\",\n            \"phone\": \"082500000001\",\n            \"email\": \"jojosaputra1990@gmail.com\"\n        },\n        \"data\": {\n            \"account\" : \"accountSchema.dumps\"\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/notification",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"notification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notification [push-notif]",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-App",
+										"value": "service-notif",
+										"type": "text"
+									},
+									{
+										"key": "X-App-Key",
+										"value": "21107c5e5ade474abdc787f8ba99f6a1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source\": \"account\",\n    \"severity\": \"info\",\n    \"payload\": {\n        \"channels\": [\n            {\n                \"name\": \"internal\",\n                \"subject\" : \"subject string\",\n                \"message\" : \"message string\",\n                \"data\": {\n                    \"type\" : \"purchase\",\n                    \"uid\": \"order-uid\"\n                }\n            }\n        ],\n        \"user\": {\n            \"uid\": \"ce03934e-9138-4bb5-bf20-249f882d6cc9\",\n            \"name\": \"aku buyer\",\n            \"phone\": \"082500000001\",\n            \"email\": \"jojosaputra1990@gmail.com\"\n        },\n        \"data\": {\n            \"account\" : \"accountSchema.dumps\"\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/notification",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"notification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notification [whatsapp]",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-App",
+										"value": "service-notif",
+										"type": "text"
+									},
+									{
+										"key": "X-App-Key",
+										"value": "21107c5e5ade474abdc787f8ba99f6a1",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source\": \"account\",\n    \"severity\": \"info\",\n    \"payload\": {\n        \"channels\": [\n            {\n                \"name\": \"whatsapp\",\n                \"template\": {\n                    \"payload\" : \"whatsapp-account-request-otp\"\n                }\n            }\n        ],\n        \"user\": {\n            \"uid\": \"f6b67c87-310e-4a9d-b639-be21db31d47e\",\n            \"name\": \"ganteng\",\n            \"phone\": \"081220694422\",\n            \"email\": \"jojosaputra1990@gmail.com\"\n        },\n        \"data\": {\n            \"account\" : {\n                \"uid\": \"f6b67c87-310e-4a9d-b639-be21db31d47e\",\n                \"name\": \"ganteng\",\n                \"phone\": \"081220694422\",\n                \"otp\": \"000002\"\n            }\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/notification",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"notification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notification/send-notif",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/notification/send-notif?uid=dd88f5cd-a601-4fde-8352-e07d147bf46f",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"notification",
+										"send-notif"
+									],
+									"query": [
+										{
+											"key": "uid",
+											"value": "034b5065-d587-44cb-9165-a2de898aab93",
+											"description": "without template",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "bda17076-db9a-449b-a629-f3cca9f595e4",
+											"description": "with template",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "4f0a31fc-2685-4a4d-aaa2-9fd56f9fdcb2",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "b06eefb8-9c07-4c2f-94f5-4fbe57e297ef",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "dd88f5cd-a601-4fde-8352-e07d147bf46f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notification/send-mail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/notification/send-mail?uid=85ff1d54-5197-4aa5-9285-284d3f6433f2&template=email-account-welcome-buyer-txt",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"notification",
+										"send-mail"
+									],
+									"query": [
+										{
+											"key": "uid",
+											"value": "e5c9a6ac-268e-4c8f-a18b-e7082eb8db96",
+											"disabled": true
+										},
+										{
+											"key": "template",
+											"value": "email-transaction-sale-completed-html",
+											"disabled": true
+										},
+										{
+											"key": "uid",
+											"value": "85ff1d54-5197-4aa5-9285-284d3f6433f2"
+										},
+										{
+											"key": "template",
+											"value": "email-account-welcome-buyer-txt"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "log",
+					"item": [
+						{
+							"name": "log/create-log",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"time\": \"2022-01-01 01:01:01\",\n    \"source\": \"account\",\n    \"severity\": \"info\",\n    \"action\": \"auth\",\n    \"data\": {}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/log/create-log",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"log",
+										"create-log"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "log/create-log Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/log/create-log",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"log",
+										"create-log"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "qiscus",
+					"item": [
+						{
+							"name": "qiscus",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_service_notif}}/dev/qiscus",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"qiscus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "qiscus/set-webhook",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": \"https://1716-103-213-128-207.ap.ngrok.io/notif/webhook/whatsapps\",\n    \"channel\": 3225\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/qiscus/set-webhook",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"qiscus",
+										"set-webhook"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "qiscus/send-template-message",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": \"https://dfa1-103-213-128-207.ap.ngrok.io/notif/webhook/whatsapp\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/qiscus/send-template-message",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"qiscus",
+										"send-template-message"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "push-notif",
+					"item": [
+						{
+							"name": "fcm/send",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "key={{FIREBASE_SERVER_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"score\": \"5x1\",\n        \"time\": \"15:10\"\n    },\n    \"to\" : \"bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...\",\n    \"direct_boot_ok\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fcm.googleapis.com/fcm/send",
+									"protocol": "https",
+									"host": [
+										"fcm",
+										"googleapis",
+										"com"
+									],
+									"path": [
+										"fcm",
+										"send"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "push-notif/send",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_uid\": \"ce03934e-9138-4bb5-bf20-249f882d6cc9\",\n    \"firebase_payload\": {\n        \"notification\": {\n            \"title\": \"title notification\",\n            \"body\": \"Message notification.\"\n        },\n        \"data\": {\n            \"type\": \"purchase\",\n            \"uid\": \"order-uid\"\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_service_notif}}/dev/push-notif/send",
+									"host": [
+										"{{host_service_notif}}"
+									],
+									"path": [
+										"dev",
+										"push-notif",
+										"send"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "dev",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dev/headers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev/headers",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev",
+								"headers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dev/exception",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev/exception",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev",
+								"exception"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dev/unauthorized",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev/unauthorized",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev",
+								"unauthorized"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dev/service-error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev/service-error",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev",
+								"service-error"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dev/data-not-found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev/data-not-found",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev",
+								"data-not-found"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dev/validation-error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/dev/validation-error",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"dev",
+								"validation-error"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "template",
+			"item": [
+				{
+					"name": "template",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/template",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "template",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "code",
+									"value": "code-name",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "text",
+									"description": "text | file | external",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host_service_notif}}/template",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"template"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "private",
+			"item": [
+				{
+					"name": "notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App",
+								"value": "service-notif",
+								"type": "text"
+							},
+							{
+								"key": "X-App-Key",
+								"value": "21107c5e5ade474abdc787f8ba99f6a1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source\": \"account\",\n    \"severity\": \"info\",\n    \"payload\": {\n        \"channels\": [\n            {\n                \"name\": \"internal\",\n                \"subject\" : \"subject string\",\n                \"message\" : \"message string\",\n                \"data\": {\n                    \"type\" : \"purchase\",\n                    \"uid\": \"order-uid\"\n                }\n            },\n            {\n                \"name\": \"email\",\n                \"subject\" : \"subject string\",\n                \"body_text\" : \"body text string\",\n                \"body_html\" : \"body html string\"\n            }\n        ],\n        \"user\": {\n            \"uid\": \"f6b67c87-310e-4a9d-b639-be21db31d47e\",\n            \"name\": \"aku buyer\",\n            \"phone\": \"082500000001\",\n            \"email\": \"jojosaputra1990@gmail.com\"\n        },\n        \"data\": {\n            \"account\" : \"accountSchema.dumps\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_service_notif}}/private/notification",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"private",
+								"notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notification [template]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App",
+								"value": "service-notif",
+								"type": "text"
+							},
+							{
+								"key": "X-App-Key",
+								"value": "21107c5e5ade474abdc787f8ba99f6a1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source\": \"account\",\n    \"severity\": \"info\",\n    \"payload\": {\n        \"channels\": [\n            {\n                \"name\": \"internal\",\n                \"template\": {\n                    \"subject\": \"internal-purchase-subject\",\n                    \"message\": \"internal-purchase-message\"\n                },\n                \"data\": {\n                    \"type\" : \"purchase\",\n                    \"uid\": \"order-uid\"\n                }\n            },\n            {\n                \"name\": \"email\",\n                \"template\": {\n                    \"subject\": \"email-account-welcome-buyer-subject\",\n                    \"body_text\" : \"email-account-welcome-buyer-txt\",\n                    \"body_html\" : \"email-account-welcome-buyer-html\"\n                }\n            }\n        ],\n        \"user\": {\n            \"uid\": \"f6b67c87-310e-4a9d-b639-be21db31d47e\",\n            \"name\": \"aku buyer\",\n            \"phone\": \"082500000001\",\n            \"email\": \"jojosaputra1990@gmail.com\"\n        },\n        \"data\": {\n            \"account\" : \"accountSchema.dumps\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_service_notif}}/private/notification",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"private",
+								"notification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/user?page=1&sort=desc&order_by=date",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "desc",
+									"description": "asc | desc"
+								},
+								{
+									"key": "order_by",
+									"value": "date",
+									"description": "status | date | id"
+								},
+								{
+									"key": "filter_uids[]",
+									"value": "0b25beb1-bd66-4f53-b1ee-932360018a31",
+									"disabled": true
+								},
+								{
+									"key": "filter_uids[]",
+									"value": "4e6f292b-5dd4-4788-ba43-c01ef27de19c",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "seen",
+									"description": "new | seen",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/view",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/user/view?filter_uids[]=0b25beb1-bd66-4f53-b1ee-932360018a31&filter_uids[]=4e6f292b-5dd4-4788-ba43-c01ef27de19c",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"user",
+								"view"
+							],
+							"query": [
+								{
+									"key": "filter_uids[]",
+									"value": "0b25beb1-bd66-4f53-b1ee-932360018a31",
+									"description": "list uid to update "
+								},
+								{
+									"key": "filter_uids[]",
+									"value": "4e6f292b-5dd4-4788-ba43-c01ef27de19c",
+									"description": "list uid to update "
+								},
+								{
+									"key": "status",
+									"value": "seen",
+									"description": "asc | desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/{uid}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/user/6ecfc194-7bd5-48d6-9ce2-d71a811c4062",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"user",
+								"6ecfc194-7bd5-48d6-9ce2-d71a811c4062"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/{uid}/view",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/user/0b25beb1-bd66-4f53-b1ee-932360018a31/view",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"user",
+								"0b25beb1-bd66-4f53-b1ee-932360018a31",
+								"view"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "log",
+			"item": [
+				{
+					"name": "log",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/log?page=1&sort=desc&order_by=date&source=promo",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"log"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "desc",
+									"description": "asc | desc"
+								},
+								{
+									"key": "order_by",
+									"value": "date",
+									"description": "status | date | id"
+								},
+								{
+									"key": "filter_uids[]",
+									"value": "18463d15-6011-4150-9189-9408e83ff119",
+									"disabled": true
+								},
+								{
+									"key": "filter_uids[]",
+									"value": "1a421489-555b-4ac1-b43f-b2002178697f",
+									"disabled": true
+								},
+								{
+									"key": "source",
+									"value": "account",
+									"description": "account | product | promo",
+									"disabled": true
+								},
+								{
+									"key": "source",
+									"value": "product",
+									"disabled": true
+								},
+								{
+									"key": "source",
+									"value": "promo"
+								},
+								{
+									"key": "severity",
+									"value": "info",
+									"description": "info | warning | error | critical",
+									"disabled": true
+								},
+								{
+									"key": "action",
+									"value": "voucher.delete",
+									"disabled": true
+								},
+								{
+									"key": "action",
+									"value": "category",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "delete",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log/{uid}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/log/501f4187-8af3-4bbd-a48d-4460a46b80ba",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"log",
+								"501f4187-8af3-4bbd-a48d-4460a46b80ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log/{uid}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host_service_notif}}/log/e25c864c-1384-4048-a09c-b2d0b9ba8b71",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"log",
+								"e25c864c-1384-4048-a09c-b2d0b9ba8b71"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "webhook",
+			"item": [
+				{
+					"name": "whatsapp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"app_code\": \"nnzun-hxotcilsckixzj3\",\n    \"channel_id\": 3225,\n    \"display_phone_number\": \"6281290099520\",\n    \"phone_number_id\": \"101332589406163\",\n    \"statuses\": [\n        {\n            \"id\": \"wamid.HBgNNjI4NTcyMTcwMjYxMRUCABEYEkVEMzE1QzMyMTg0QUZFNDJBMQA=\",\n            \"recipient_id\": \"6285721702611\",\n            \"status\": \"read\",\n            \"timestamp\": \"1666767839\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_service_notif}}/webhook/whatsapp",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"webhook",
+								"whatsapp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "push-notif",
+			"item": [
+				{
+					"name": "push-notif/token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token_access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"user-token-2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_service_notif}}/push-notif/token",
+							"host": [
+								"{{host_service_notif}}"
+							],
+							"path": [
+								"push-notif",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_service_notif}}/",
+					"host": [
+						"{{host_service_notif}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
