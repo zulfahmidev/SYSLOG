@@ -65,7 +65,7 @@ class LogDaos(Daos):
             "path": log["_source"].get("path"),
             "status_code": log["_source"].get("status_code"),
             "level": log["_source"].get("level"),
-            "service": log["_source"].get("service"),
+            "service": log["_source"].get("service")
 		} for log in logs]
         
         # Return Result With Pagination
@@ -94,6 +94,7 @@ class LogDaos(Daos):
             "service": record["_source"].get("service"),
             "payloads": record["_source"].get("payloads"),
             "additional_details": record["_source"].get("additional_details"),
+            "elapsed_time": record["_source"].get("elapsed_time")
 		}
   
 		# Return Result

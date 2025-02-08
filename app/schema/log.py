@@ -15,7 +15,7 @@ class LogPayloadSchema(Schema):
 
 # Schema Details
 class LogSchema(Schema):
-    timestamp = fields.DateTime(required=True, format="%Y-%m-%dT%H:%M:%S")
+    timestamp = fields.DateTime(required=True, format="%Y-%m-%d %H:%M:%S")
     method = fields.String(required=True)
     path = fields.String(required=True)
     payloads = fields.List(fields.Nested(LogPayloadSchema))  # List of nested payload objects

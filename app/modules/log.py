@@ -11,7 +11,6 @@ class LogModule(BaseModule):
     def addLog(self, payload: dict) -> bool :
         # Validate
         data = LogSchema().load(payload)               
-        print(payload)
         try :
             # Save To ES
             result = LogDaos.add(data.get('service'), data)
